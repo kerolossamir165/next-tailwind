@@ -2,8 +2,13 @@ import React from "react";
 import { useRouter } from "next/router";
 import { getAllProducts, getProduct } from "../../lib/shopify";
 import ProductPageContent from "../../components/ProductPageContent";
+
 function Product({ data }) {
-  return <ProductPageContent product={data} />;
+  return (
+    <div className="min-h-screen py-12 sm:pt-20">
+      <ProductPageContent product={data} />
+    </div>
+  );
 }
 
 export async function getStaticProps({ params }) {
