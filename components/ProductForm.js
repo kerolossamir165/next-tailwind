@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { formater } from "../utils/helpers";
 import ProductOptions from "./ProductOptions";
-
+import { CartContext } from "../context/shopContext";
 function ProductForm({ product }) {
+  const { addToChart } = useContext(CartContext);
+
   let allVariantOptions = product.variants.edges?.map((variant) => {
     let allOptions = {};
     variant.node.selectedOptions.map(
@@ -38,6 +40,17 @@ function ProductForm({ product }) {
         [name]: value,
       };
     });
+
+    let selctions = {
+      ...selectedOptions, 
+      [name]: value
+    }
+
+    allVariantOptions.map(item => {
+      if(JSON.stringify(item.options) === JSON.stringify(selctions)) {
+        setSelectedVariants(item)
+      }
+    })
   }
 
   return (
@@ -56,7 +69,10 @@ function ProductForm({ product }) {
           setOptionsValue={setOptionsValue}
         />
       ))}
-      <button className="bg-black rounded-lg text-white px-2 py-3 hover:bg-gray-800 ">
+      <button
+        onClick={() => addToChart(selectedVariants)}
+        className="bg-black rounded-lg text-white px-2 py-3 hover:bg-gray-800 "
+      >
         Add To Chart
       </button>
     </div>
