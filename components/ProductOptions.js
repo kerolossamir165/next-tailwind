@@ -1,7 +1,6 @@
 import React from "react";
 
 function ProductOptions({ name, values, selectedOptions, setOptionsValue }) {
-  console.log(values);
   return (
     <fieldset>
       <legend className="text-xl font-semibold">{name}</legend>
@@ -22,7 +21,7 @@ function ProductOptions({ name, values, selectedOptions, setOptionsValue }) {
                 onChange={() => setOptionsValue(name, value)}
               />
               <div
-                className={`p-2 my-3 text-lg rounded-full block cursor-pointer mr-3 ${
+                className={`p-2 mt-3 mb-1 text-lg rounded-full block cursor-pointer mr-3 ${
                   checked
                     ? "text-white bg-gray-900"
                     : "text-gray-900 bg-gray-200"

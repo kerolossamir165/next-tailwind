@@ -23,6 +23,7 @@ function ShopContextProvider({ children }) {
   }, []);
 
   async function addToChart(item) {
+    setChartOpen(true);
     if (chart.length === 0) {
       setChart([item]);
 
@@ -49,6 +50,23 @@ function ShopContextProvider({ children }) {
     }
   }
 
+  async function removeFromCart(itemToRemove) {
+    let updatedChart = chart.filter((item) => {
+      return item.id !== itemToRemove;
+    });
+    setChart(updatedChart);
+
+    let newCheckout = await updateCheckOut(checkoutId, updatedChart);
+    localStorage.setItem(
+      "checkOut_Id",
+      JSON.stringify([updatedChart, newCheckout])
+    );
+
+    if (chart.length === 1) {
+      setChartOpen(false);
+    }
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -57,6 +75,7 @@ function ShopContextProvider({ children }) {
         setChartOpen,
         addToChart,
         checkoutUrl,
+        removeFromCart,
       }}
     >
       {children}

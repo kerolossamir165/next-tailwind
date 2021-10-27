@@ -42,15 +42,15 @@ function ProductForm({ product }) {
     });
 
     let selctions = {
-      ...selectedOptions, 
-      [name]: value
-    }
+      ...selectedOptions,
+      [name]: value,
+    };
 
-    allVariantOptions.map(item => {
-      if(JSON.stringify(item.options) === JSON.stringify(selctions)) {
-        setSelectedVariants(item)
+    allVariantOptions.map((item) => {
+      if (JSON.stringify(item.options) === JSON.stringify(selctions)) {
+        setSelectedVariants(item);
       }
-    })
+    });
   }
 
   return (
@@ -71,7 +71,7 @@ function ProductForm({ product }) {
       ))}
       <button
         onClick={() => addToChart(selectedVariants)}
-        className="bg-black rounded-lg text-white px-2 py-3 hover:bg-gray-800 "
+        className="bg-black rounded-lg mt-5 text-white px-2 py-3 hover:bg-gray-800 "
       >
         Add To Chart
       </button>
